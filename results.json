@@ -1,0 +1,219 @@
+{
+  "total_cost": 14168.249999999995,
+  "total_impressions": 462,
+  "total_clicks": 286,
+  "total_conversions": 17,
+  "avg_ctr": 83.73043795620438,
+  "avg_cpc": 49.539335664335646,
+  "avg_conversion_cost": 833.426470588235,
+  "ads": {
+    "M-16915113667": {
+      "impressions": 281,
+      "clicks": 192,
+      "cost": 8124.779999999995,
+      "conversions": 10,
+      "ctr": 68.32740213523132
+    },
+    "M-16930620460": {
+      "impressions": 181,
+      "clicks": 94,
+      "cost": 6043.4699999999975,
+      "conversions": 7,
+      "ctr": 51.93370165745856
+    }
+  },
+  "categories": {
+    "Сопутствующие запросы": {
+      "impressions": 341,
+      "clicks": 238,
+      "conversions": 13
+    },
+    "Целевые запросы": {
+      "impressions": 59,
+      "clicks": 35,
+      "conversions": 4
+    },
+    "Узкие запросы": {
+      "impressions": 14,
+      "clicks": 8,
+      "conversions": 0
+    },
+    "Альтернативные запросы": {
+      "impressions": 48,
+      "clicks": 5,
+      "conversions": 0
+    }
+  },
+  "top_ctr_keywords": [
+    {
+      "keyword": "каталог с телеграмм каналами и чатами",
+      "impressions": 2,
+      "clicks": 2,
+      "ctr": 100.0,
+      "cost": 30.7,
+      "conversions": 0
+    },
+    {
+      "keyword": "поиск каналов тг",
+      "impressions": 2,
+      "clicks": 2,
+      "ctr": 100.0,
+      "cost": 37.88,
+      "conversions": 0
+    },
+    {
+      "keyword": "популярные телеграм каналы в россии",
+      "impressions": 2,
+      "clicks": 2,
+      "ctr": 100.0,
+      "cost": 29.15,
+      "conversions": 0
+    },
+    {
+      "keyword": "список платных тг каналов",
+      "impressions": 2,
+      "clicks": 2,
+      "ctr": 100.0,
+      "cost": 77.47,
+      "conversions": 0
+    },
+    {
+      "keyword": "телеграмм каналы поиск",
+      "impressions": 2,
+      "clicks": 2,
+      "ctr": 100.0,
+      "cost": 32.92,
+      "conversions": 0
+    }
+  ],
+  "conversion_keywords": [
+    {
+      "keyword": "аналитика телеграмм каналов бесплатно",
+      "impressions": 1,
+      "clicks": 1,
+      "ctr": 100.0,
+      "cost": 146.64,
+      "conversions": 2
+    },
+    {
+      "keyword": "телеграмм каналы селлеры",
+      "impressions": 2,
+      "clicks": 2,
+      "ctr": 100.0,
+      "cost": 129.95,
+      "conversions": 1
+    },
+    {
+      "keyword": "бесплатная аналитика телеграм каналов",
+      "impressions": 1,
+      "clicks": 1,
+      "ctr": 100.0,
+      "cost": 27.42,
+      "conversions": 1
+    },
+    {
+      "keyword": "биржа telegram каналов",
+      "impressions": 1,
+      "clicks": 1,
+      "ctr": 100.0,
+      "cost": 25.71,
+      "conversions": 1
+    },
+    {
+      "keyword": "биржи покупки рекламы в телеграм",
+      "impressions": 1,
+      "clicks": 1,
+      "ctr": 100.0,
+      "cost": 113.69,
+      "conversions": 1
+    },
+    {
+      "keyword": "биржи тг каналов",
+      "impressions": 1,
+      "clicks": 1,
+      "ctr": 100.0,
+      "cost": 78.55,
+      "conversions": 1
+    },
+    {
+      "keyword": "каналы в тг купить",
+      "impressions": 1,
+      "clicks": 1,
+      "ctr": 100.0,
+      "cost": 29.3,
+      "conversions": 1
+    },
+    {
+      "keyword": "малоизвестные каналы в тг",
+      "impressions": 1,
+      "clicks": 1,
+      "ctr": 100.0,
+      "cost": 42.44,
+      "conversions": 1
+    },
+    {
+      "keyword": "найти похожие каналы в телеграм",
+      "impressions": 1,
+      "clicks": 1,
+      "ctr": 100.0,
+      "cost": 39.4,
+      "conversions": 1
+    },
+    {
+      "keyword": "нативная реклама телеграмм",
+      "impressions": 1,
+      "clicks": 1,
+      "ctr": 100.0,
+      "cost": 372.05,
+      "conversions": 1
+    },
+    {
+      "keyword": "парсинг тг каналов",
+      "impressions": 1,
+      "clicks": 1,
+      "ctr": 100.0,
+      "cost": 37.64,
+      "conversions": 1
+    },
+    {
+      "keyword": "подобрать тг канал для закупки рекламы",
+      "impressions": 1,
+      "clicks": 1,
+      "ctr": 100.0,
+      "cost": 122.1,
+      "conversions": 1
+    },
+    {
+      "keyword": "поиск блогов в тг на рекламу",
+      "impressions": 1,
+      "clicks": 1,
+      "ctr": 100.0,
+      "cost": 61.84,
+      "conversions": 1
+    },
+    {
+      "keyword": "примеры рекламных постов а тг",
+      "impressions": 1,
+      "clicks": 1,
+      "ctr": 100.0,
+      "cost": 65.69,
+      "conversions": 1
+    },
+    {
+      "keyword": "раскрутить телеграм канал бесплатно",
+      "impressions": 1,
+      "clicks": 1,
+      "ctr": 100.0,
+      "cost": 161.57,
+      "conversions": 1
+    },
+    {
+      "keyword": "тг каналы крыма реклама",
+      "impressions": 1,
+      "clicks": 1,
+      "ctr": 100.0,
+      "cost": 25.2,
+      "conversions": 1
+    }
+  ]
+}

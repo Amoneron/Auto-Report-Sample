@@ -1,0 +1,38 @@
+<!-- Keyword Analysis -->
+<section class="card mb-8">
+    <h2 class="text-xl font-bold mb-4">Анализ поисковых запросов</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div>
+            <h3 class="text-lg font-semibold mb-3">Топ-5 запросов по CTR</h3>
+            <div class="chart-container">
+                <canvas id="topCtrKeywordsChart"></canvas>
+            </div>
+        </div>
+        
+        <div>
+            <h3 class="text-lg font-semibold mb-3">Запросы с конверсиями</h3>
+            <div class="chart-container">
+                <canvas id="conversionKeywordsChart"></canvas>
+            </div>
+        </div>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+            <h3 class="text-lg font-semibold mb-3">Запросы к исключению</h3>
+            <div class="bg-red-50 p-4 rounded-lg" id="keywordsToRemove">
+                <!-- Данные будут добавлены через JavaScript -->
+                <p class="text-center text-sm">Загрузка данных...</p>
+            </div>
+        </div>
+        
+        <div>
+            <h3 class="text-lg font-semibold mb-3">Запросы к добавлению</h3>
+            <div class="bg-green-50 p-4 rounded-lg" id="keywordsToAdd">
+                <!-- Данные будут добавлены через JavaScript -->
+                <p class="text-center text-sm">Загрузка данных...</p>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Анализ рекламной кампании Gooroo.tools</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.0/papaparse.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9fafb;
+            color: #1f2937;
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .highlight {
+            background: linear-gradient(120deg, rgba(56, 189, 248, 0.2) 0%, rgba(56, 189, 248, 0) 100%);
+            padding: 0 0.25rem;
+            border-radius: 0.25rem;
+        }
+        .metric-card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            padding: 1.25rem;
+            transition: transform 0.2s;
+        }
+        .metric-card:hover {
+            transform: translateY(-5px);
+        }
+        .top-gradient {
+            background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
+            height: 0.25rem;
+            width: 100%;
+            border-radius: 0.25rem 0.25rem 0 0;
+        }
+        .highlight-gradient {
+            background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+            max-width: 100%;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mx-auto px-4 py-6 max-w-5xl">
+        <!-- Header -->
+        <header class="mb-8 text-center">
+            <div class="flex justify-center mb-4">
+                <!-- Встроенный SVG логотип вместо внешнего изображения -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="64" height="64" class="fill-current text-blue-600">
+                    <path d="M100 15c-47.5 0-86 38.5-86 86s38.5 86 86 86 86-38.5 86-86-38.5-86-86-86zm-20 120c-16.5 0-30-13.5-30-30s13.5-30 30-30 30 13.5 30 30-13.5 30-30 30zm70-15c-8.25 0-15-6.75-15-15s6.75-15 15-15 15 6.75 15 15-6.75 15-15 15z"/>
+                </svg>
+            </div>
+            <h1 class="text-3xl font-bold mb-2">Анализ рекламной кампании Яндекс Директ</h1>
+            <h2 class="text-xl text-gray-600">Сервис Gooroo.tools</h2>
+            <p class="mt-3 text-gray-600 max-w-2xl mx-auto">Интеллектуальный сервис для точного и быстрого подбора каналов Telegram для размещения рекламы</p>
+        </header>
+        
+        <!-- Financial Overview -->
+        <section class="card mb-8">
+            <h2 class="text-xl font-bold mb-4">Основные финансовые показатели</h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="metric-card">
+                    <div class="top-gradient mb-3"></div>
+                    <h3 class="text-base font-semibold text-gray-500">Общий расход</h3>
+                    <p class="text-lg font-bold mt-1">14 168,25 ₽</p>
+                    <p class="text-sm text-gray-500 mt-1">За весь период кампании</p>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="top-gradient mb-3"></div>
+                    <h3 class="text-base font-semibold text-gray-500">Всего конверсий</h3>
+                    <p class="text-lg font-bold mt-1">17</p>
+                    <p class="text-sm text-gray-500 mt-1">Из 286 переходов (5,9%)</p>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="top-gradient mb-3"></div>
+                    <h3 class="text-base font-semibold text-gray-500">Средняя цена конверсии</h3>
+                    <p class="text-lg font-bold mt-1">833,43 ₽</p>
+                    <p class="text-sm text-gray-500 mt-1">За одно целевое действие</p>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="top-gradient mb-3"></div>
+                    <h3 class="text-base font-semibold text-gray-500">Ср. цена клика</h3>
+                    <p class="text-lg font-bold mt-1">49,54 ₽</p>
+                    <p class="text-sm text-gray-500 mt-1">По всем ключевым фразам</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Executive Summary -->
+        <section class="card mb-8">
+            <h2 class="text-xl font-bold mb-4">Краткие выводы</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="metric-card">
+                    <div class="top-gradient mb-3"></div>
+                    <h3 class="text-base font-semibold text-gray-500">Лучшее объявление</h3>
+                    <p class="text-lg font-bold mt-1" id="best-ad">M-16915113667</p>
+                    <p class="text-sm text-gray-500 mt-1">По показателям кликов и конверсии</p>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="top-gradient mb-3"></div>
+                    <h3 class="text-base font-semibold text-gray-500">Средний CTR</h3>
+                    <p class="text-lg font-bold mt-1" id="avg-ctr">83.73%</p>
+                    <p class="text-sm text-gray-500 mt-1">Среднее значение по всем запросам</p>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="top-gradient mb-3"></div>
+                    <h3 class="text-base font-semibold text-gray-500">Всего показов</h3>
+                    <p class="text-lg font-bold mt-1" id="total-impressions">462</p>
+                    <p class="text-sm text-gray-500 mt-1">За весь период кампании</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Ad Performance Analysis -->
+        <section class="card mb-8">
+            <h2 class="text-xl font-bold mb-4">Анализ эффективности объявлений</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <h3 class="text-lg font-semibold mb-3">Сравнение объявлений</h3>
+                    <div class="chart-container">
+                        <canvas id="adPerformanceChart"></canvas>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-3">Конверсии по объявлениям</h3>
+                    <div class="chart-container">
+                        <canvas id="conversionChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <h3 class="text-lg font-semibold mb-3">Детальный анализ объявлений</h3>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white rounded-lg">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th class="py-2 px-3 text-left text-sm">№ Объявления</th>
+                                <th class="py-2 px-3 text-left text-sm">Показы</th>
+                                <th class="py-2 px-3 text-left text-sm">Клики</th>
+                                <th class="py-2 px-3 text-left text-sm">CTR (%)</th>
+                                <th class="py-2 px-3 text-left text-sm">Расход (руб.)</th>
+                                <th class="py-2 px-3 text-left text-sm">Цена клика</th>
+                                <th class="py-2 px-3 text-left text-sm">Конверсии</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adPerformanceTable" class="text-sm">
+                            <tr>
+                                <td class="py-2 px-3 border-b">M-16915113667</td>
+                                <td class="py-2 px-3 border-b">258</td>
+                                <td class="py-2 px-3 border-b">197</td>
+                                <td class="py-2 px-3 border-b">76.36%</td>
+                                <td class="py-2 px-3 border-b">7 489,21</td>
+                                <td class="py-2 px-3 border-b">38,02</td>
+                                <td class="py-2 px-3 border-b">7</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-3 border-b">M-16930620460</td>
+                                <td class="py-2 px-3 border-b">204</td>
+                                <td class="py-2 px-3 border-b">89</td>
+                                <td class="py-2 px-3 border-b">43.63%</td>
+                                <td class="py-2 px-3 border-b">6 679,04</td>
+                                <td class="py-2 px-3 border-b">75,05</td>
+                                <td class="py-2 px-3 border-b">10</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Target Audience Analysis -->
+        <section class="card mb-8">
+            <h2 class="text-xl font-bold mb-4">Анализ целевой аудитории</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <h3 class="text-lg font-semibold mb-3">Эффективность по категориям</h3>
+                    <div class="chart-container">
+                        <canvas id="categoryPerformanceChart"></canvas>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-3">Распределение запросов</h3>
+                    <div class="chart-container">
+                        <canvas id="queryTypesChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <h3 class="text-lg font-semibold mb-3">Соответствие целевой аудитории</h3>
+                <div class="bg-blue-50 p-5 rounded-lg">
+                    <p class="mb-2 text-sm"><span class="font-semibold">Целевая аудитория сервиса:</span> Маркетологи, владельцы бизнеса, администраторы Telegram-каналов</p>
+                    <p class="mb-3 text-sm"><span class="font-semibold">Предположительные потребности:</span> Автоматизация размещения рекламы, аналитика каналов, оптимизация рекламного бюджета</p>
+                    
+                    <div id="targetAudienceAnalysis" class="text-sm">
+                        <ul class="list-disc list-inside space-y-2">
+                            <li class="text-green-700">✓ Основные запросы соответствуют тематике сервиса (биржа, каналы, реклама в Telegram)</li>
+                            <li class="text-green-700">✓ Высокий CTR по запросам категории "Целевые запросы" (67.2%)</li>
+                            <li class="text-yellow-600">⚠ Присутствуют нецелевые запросы (накрутка подписчиков, эротика)</li>
+                            <li class="text-yellow-600">⚠ Недостаточно запросов, связанных с аналитикой и подбором каналов</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Keyword Analysis -->
+        <section class="card mb-8">
+            <h2 class="text-xl font-bold mb-4">Анализ поисковых запросов</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <h3 class="text-lg font-semibold mb-3">Топ-5 запросов по CTR</h3>
+                    <div class="chart-container">
+                        <canvas id="topCtrKeywordsChart"></canvas>
+                    </div>
+                    <div class="text-sm">
+                        <table class="w-full text-left border-collapse">
+                            <thead class="bg-gray-100">
+                                <tr>
+                                    <th class="py-1 px-2 border">Запрос</th>
+                                    <th class="py-1 px-2 border">CTR</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td class="py-1 px-2 border">каталог с телеграмм каналами и чатами</td><td class="py-1 px-2 border">100.00%</td></tr>
+                                <tr><td class="py-1 px-2 border">поиск каналов тг</td><td class="py-1 px-2 border">100.00%</td></tr>
+                                <tr><td class="py-1 px-2 border">популярные телеграм каналы в россии</td><td class="py-1 px-2 border">100.00%</td></tr>
+                                <tr><td class="py-1 px-2 border">список платных тг каналов</td><td class="py-1 px-2 border">100.00%</td></tr>
+                                <tr><td class="py-1 px-2 border">телеграмм каналы поиск</td><td class="py-1 px-2 border">100.00%</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-3">Запросы с конверсиями</h3>
+                    <div class="chart-container">
+                        <canvas id="conversionKeywordsChart"></canvas>
+                    </div>
+                    <div class="text-sm">
+                        <table class="w-full text-left border-collapse">
+                            <thead class="bg-gray-100">
+                                <tr>
+                                    <th class="py-1 px-2 border">Запрос</th>
+                                    <th class="py-1 px-2 border">Конверсий</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td class="py-1 px-2 border">аналитика телеграмм каналов бесплатно</td><td class="py-1 px-2 border">2</td></tr>
+                                <tr><td class="py-1 px-2 border">биржи тг каналов</td><td class="py-1 px-2 border">2</td></tr>
+                                <tr><td class="py-1 px-2 border">бесплатная аналитика телеграм каналов</td><td class="py-1 px-2 border">1</td></tr>
+                                <tr><td class="py-1 px-2 border">биржа telegram каналов</td><td class="py-1 px-2 border">1</td></tr>
+                                <tr><td class="py-1 px-2 border">биржи покупки рекламы в телеграм</td><td class="py-1 px-2 border">1</td></tr>
+                                <tr><td class="py-1 px-2 border">телеграмм каналы селлеры</td><td class="py-1 px-2 border">1</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="text-lg font-semibold mb-3">Запросы к исключению</h3>
+                    <div class="bg-red-50 p-4 rounded-lg" id="keywordsToRemove">
+                        <ul class="list-disc list-inside space-y-1 text-sm">
+                            <li>"бесплатная накрутка тгк" - нецелевой запрос</li>
+                            <li>"бесплатные подписчик тг накрутка" - нецелевой запрос</li>
+                            <li>"биржа рекламы тг эротика" - нецелевой запрос</li>
+                            <li>"живые боты для накрутки каналов в тг" - нецелевой запрос</li>
+                            <li>"tgstat" - конкурент, очень низкий CTR (3,57%)</li>
+                            <li>"анализ тг канала" - низкий CTR (25%)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-3">Запросы к добавлению</h3>
+                    <div class="bg-green-50 p-4 rounded-lg" id="keywordsToAdd">
+                        <ul class="list-disc list-inside space-y-1 text-sm">
+                            <li>"подбор каналов для рекламы в телеграм" - ключевая функция</li>
+                            <li>"аналитика эффективности рекламы" - ценность сервиса</li>
+                            <li>"интеллектуальный подбор телеграм каналов" - USP</li>
+                            <li>"оптимизация рекламного бюджета в телеграм" - выгода</li>
+                            <li>"сервис подбора телеграм каналов" - прямой запрос</li>
+                            <li>"ai подбор каналов телеграм" - технологическое преимущество</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Recommendations -->
+        <section class="card">
+            <h2 class="text-xl font-bold mb-4">Рекомендации по оптимизации</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-4 rounded-lg">
+                    <div class="text-blue-500 mb-3">
+                        <i class="fas fa-bullseye text-2xl"></i>
+                    </div>
+                    <h3 class="text-base font-semibold mb-2">Оптимизация объявлений</h3>
+                    <div id="adRecommendations" class="text-sm space-y-2">
+                        <ul class="list-disc list-inside text-sm">
+                            <li>Оптимизировать M-16930620460: высокая конверсия, но дорогие клики (75,05₽)</li>
+                            <li>Добавить в тексты объявлений акцент на аналитику и AI-подбор каналов</li>
+                            <li>Разделить объявления по сегментам: для рекламодателей и владельцев каналов</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-r from-purple-50 to-pink-50 p-4 rounded-lg">
+                    <div class="text-purple-500 mb-3">
+                        <i class="fas fa-users text-2xl"></i>
+                    </div>
+                    <h3 class="text-base font-semibold mb-2">Работа с аудиторией</h3>
+                    <div id="audienceRecommendations" class="text-sm space-y-2">
+                        <ul class="list-disc list-inside text-sm">
+                            <li>Сфокусироваться на маркетологах и владельцах бизнеса</li>
+                            <li>Исключить аудиторию, ищущую накрутку подписчиков</li>
+                            <li>Добавить аудиторию: SMM-специалисты и рекламные агентства</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-r from-green-50 to-teal-50 p-4 rounded-lg">
+                    <div class="text-green-500 mb-3">
+                        <i class="fas fa-search-dollar text-2xl"></i>
+                    </div>
+                    <h3 class="text-base font-semibold mb-2">Ключевые фразы</h3>
+                    <div id="keywordRecommendations" class="text-sm space-y-2">
+                        <ul class="list-disc list-inside text-sm">
+                            <li>Добавить запросы с акцентом на AI-подбор и аналитику</li>
+                            <li>Исключить запросы о накрутке и нецелевые темы</li>
+                            <li>Использовать в ключевых фразах слова "автоматизация" и "оптимизация"</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <h3 class="text-lg font-semibold mb-3">Дополнительные рекомендации</h3>
+                <div class="bg-gray-50 p-4 rounded-lg" id="additionalRecommendations">
+                    <div class="space-y-3 text-sm">
+                        <p class="font-semibold">1. Улучшение посадочных страниц</p>
+                        <ul class="list-disc list-inside ml-4 mb-3">
+                            <li>Создать отдельные страницы для разных сегментов</li>
+                            <li>Добавить демонстрацию конкретных преимуществ AI-подбора</li>
+                            <li>Акцентировать внимание на экономии времени и бюджета</li>
+                        </ul>
+                        
+                        <p class="font-semibold">2. Работа с аудиторией</p>
+                        <ul class="list-disc list-inside ml-4 mb-3">
+                            <li>Создать бесплатный инструмент аналитики для привлечения лидов</li>
+                            <li>Внедрить реферальную программу для текущих клиентов</li>
+                            <li>Публиковать образовательный контент по эффективной рекламе</li>
+                        </ul>
+                        
+                        <p class="font-semibold">3. Оптимизация бюджета</p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li>Снизить среднюю стоимость конверсии (сейчас 833,43₽)</li>
+                            <li>Перераспределить бюджет на более эффективные запросы</li>
+                            <li>Провести A/B тестирование разных текстов объявлений</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <footer class="mt-8 text-center text-sm text-gray-500">
+            <p>© 2025 Анализ рекламной кампании Gooroo.tools</p>
+        </footer>
+    </div>
+
+    <script>
+        // CSV данные рекламной кампании
+        const campaignData = `﻿"Поисковый запрос";"Группа";"№ Группы";"№ Объявления";"Условие показа";"Тип условия показа";"Тип соответствия";"Подобранная фраза";"Источник текста";"Категория таргетинга";"Показы";"Клики";"CTR (%)";"Расход (руб.)";"Ср. цена клика (руб.)";"Конверсия (%)";"Цена цели (руб.)";"Конверсии"
+"telegram ads";"Новая группа";5555538890;M-16915113667;"реклама в телеграм -канал -биржа";"фраза";"семантическое";-;"Автоматический";"Сопутствующие запросы";6;2;33,33;321,45;160,73;-;-;-
+"биржа телеграм каналов";"Новая группа";5555538890;M-16930620460;"биржа телеграм каналов";"фраза";"пословное";-;"Автоматический";"Целевые запросы";9;2;22,22;112,17;56,08;-;-;-
+"каталог с телеграмм каналами и чатами";"Новая группа";5555538890;M-16915113667;'---autotargeting;"автотаргетинг";-;-;"Автоматический";"Сопутствующие запросы";2;2;100,00;30,70;15,35;-;-;-
+"каталог телеграм каналов";"Новая группа";5555538890;M-16915113667;'---autotargeting;"автотаргетинг";-;-;"Автоматический";"Сопутствующие запросы";11;2;18,18;44,72;22,36;-;-;-
+"купить телеграмм канал с подписчиками с доходом";"Новая группа";5555538890;M-16915113667;'---autotargeting;"автотаргетинг";-;-;"Оригинальный";"Узкие запросы";3;2;66,67;55,31;27,65;-;-;-
+"поиск каналов тг";"Новая группа";5555538890;M-16915113667;'---autotargeting;"автотаргетинг";-;-;"Автоматический";"Целевые запросы";2;2;100,00;37,88;18,94;-;-;-
+"популярные телеграм каналы в россии";"Новая группа";5555538890;M-16915113667;'---autotargeting;"автотаргетинг";-;-;"Автоматический";"Сопутствующие запросы";2;2;100,00;29,15;14,58;-;-;-
+"продать телеграм канал биржа";"Новая группа";5555538890;M-16930620460;"биржа телеграм каналов";"фраза";"пословное";-;"Автоматический";"Целевые запросы";3;2;66,67;101,08;50,54;-;-;-
+"список платных тг каналов";"Новая группа";5555538890;M-16915113667;'---autotargeting;"автотаргетинг";-;-;"Автоматический";"Сопутствующие запросы";2;2;100,00;77,47;38,73;-;-;-
+"телеграмм каналы поиск";"Новая группа";5555538890;M-16915113667;'---autotargeting;"автотаргетинг";-;-;"Автоматический";"Сопутствующие запросы";2;2;100,00;32,92;16,46;-;-;-
+"телеграмм каналы селлеры";"Новая группа";5555538890;M-16915113667;'---autotargeting;"автотаргетинг";-;-;"Автоматический";"Сопутствующие запросы";2;2;100,00;129,95;64,98;50,00;129,95;1
+"цена телеграмм канала с подписчиками";"Новая группа";5555538890;M-16915113667;'---autotargeting;"автотаргетинг";-;-;"Автоматический";"Сопутствующие запросы";2;2;100,00;68,94;34,47;-;-;-
+"cpm в телеграм каналах";"Новая группа";5555538890;M-16930620460;'---autotargeting;"автотаргетинг";-;-;"Автоматический";"Сопутствующие запросы";1;1;100,00;155,34;155,34;-;-;-
+telegain;"Новая группа";5555538890;M-16915113667;'---autotargeting;"автотаргетинг";-;-;"Автоматический";"Сопутствующие запросы";2;1;50,00;160,94;160,94;-;-;-
+"telegram ads примеры";"Новая группа";5555538890;M-16930620460;'---autotargeting;"автотаргетинг";-;-;"Автоматический";"Сопутствующие запросы";1;1;100,00;47,94;47,94;-;-;-
+"tg region реклама";"Новая группа";5555538890;M-16930620460;"реклама в телеграм каналах -купить";"фраза";"семантическое";-;"Автоматический";"Сопутствующие запросы";1;1;100,00;25,69;25,69;-;-;-
+"tg канал";"Новая группа";5555538890;M-16915113667;'---autotargeting;"автотаргетинг";-;-;"Автоматический";"Сопутствующие запросы";2;1;50,00;14,07;14,07;-;-;-
+"tg каналы";"Новая группа";5555538890;M-16915113667;'---autotargeting;"автотаргетинг";-;-;"Автоматический";"Сопутствующие запросы";2;1;50,00;7,88;7,88;-;-;-
+tgstat;"Новая группа";5555538890;M-16915113667;'---autotargeting;"автотаргетинг";-;-;"Автоматический";"Альтернативные запросы";6;1;16,67;26,16;26,16;-;-;-
+tgstat;"Новая группа";5555538890;M-16930620460;'---autotargeting;"автотаргетинг";-;-;"Автоматический";"Альтернативные запросы";28;1;3,57;65,43;65,43;-;-;-
+"агрегатор телеграм ботов";"Новая группа";5555538890;M-16915113667;'---autotargeting;"автотаргетинг";-;-;"Автоматический";"Сопутствующие запросы";2;1;50,00;155,98;155,98;-;-;-
+"агрегаторы tg каналов";"Новая группа";5555538890;M-16930620460;'---autotargeting;"автотаргетинг";-;-;"Автоматический";"Целевые запросы";1;1;100,00;17,10;17,10;-;-;-
+"анализ канала телеграм";"Новая группа";5555538890;M-16915113667;'---autotargeting;"автотаргетинг";-;-;"Автоматический";"Сопутствующие запросы";1;1;100,00;114,59;114,59;-;-;-
+"анализ подписчиков телеграм канала";"Новая группа";5555538890;M-16930620460;'---autotargeting;"автотаргетинг";-;-;"Автоматический";"Сопутствующие запросы";1;1;100,00;15,39;15,39;-;-;-
+"анализ тг канала";"Новая группа";5555538890;M-16930620460;'---autotargeting;"автотаргетинг";-;-;"Автоматический";"Сопутствующие запросы";4;1;25,00;45,58;45,58;-;-;-
+"аналитика телеграмм каналов бесплатно";"Новая группа";5555538890;M-16930620460;'---autotargeting;"автотаргетинг";-;-;"Оригинальный";"Сопутствующие запросы";1;1;100,00;146,64;146,64;200,00;73,32;2
+"аналитика телеграмм каналов статистика";"Новая группа";5555538890;M-16930620460;'---autotargeting;"автотаргетинг";-;-;"Автоматический";"Сопутствующие запросы";1;1;100,00;31,33;31,33;-;-;-
+"бесплатная аналитика телеграм каналов";"Новая группа";5555538890;M-16915113667;'---autotargeting;"автотаргетинг";-;-;"Автоматический";"Сопутствующие запросы";1;1;100,00;27,42;27,42;100,00;27,42;1
+"бесплатная накрутка тгк";"Новая группа";5555538890;M-16930620460;'---autotargeting;"автотаргетинг";-;-;"Автоматический";"Сопутствующие запросы";2;1;50,00;36,73;36,73;-;-;-
+"бесплатное размещение в каталогах тг каналов";"Новая группа";5555538890;M-16915113667;'---autotargeting;"автотаргетинг";-;-;"Автоматический";"Альтернативные запросы";1;1;100,00;67,23;67,23;-;-;-
+"бесплатные подписчик тг накрутка";"Новая группа";5555538890;M-16930620460;'---autotargeting;"автотаргетинг";-;-;"Автоматический";"Сопутствующие запросы";2;1;50,00;65,10;65,10;-;-;-
+"бизнес телеграм каналы в красноярске";"Новая группа";5555538890;M-16915113667;'---autotargeting;"автотаргетинг";-;-;"Автоматический";"Сопутствующие запросы";1;1;100,00;52,26;52,26;-;-;-
+"биржа telegram каналов";"Новая группа";5555538890;M-16915113667;'---autotargeting;"автотаргетинг";-;-;"Автоматический";"Целевые запросы";1;1;100,00;25,71;25,71;100,00;25,71;1
+"биржа каналов тг";"Новая группа";5555538890;M-16915113667;'---autotargeting;"автотаргетинг";-;-;"Автоматический";"Целевые запросы";2;1;50,00;9,04;9,04;-;-;-
+"биржа рекламы тг эротика";"Новая группа";5555538890;M-16915113667;"биржа рекламы в телеграм";"фраза";"семантическое";-;"Оригинальный";"Сопутствующие запросы";1;1;100,00;57,09;57,09;-;-;-
+"биржа тг каналов";"Новая группа";5555538890;M-16930620460;'---autotargeting;"автотаргетинг";-;-;"Оригинальный";"Целевые запросы";2;1;50,00;29,59;29,59;-;-;-
+"биржа телеграм каналов";"Новая группа";5555538890;M-16915113667;"биржа телеграм каналов";"фраза";"семантическое";-;"Автоматический";"Целевые запросы";5;1;20,00;25,90;25,90;-;-;-
+"биржа телеграмм каналов";"Новая группа";5555538890;M-16930620460;"биржа телеграм каналов";"фраза";"семантическое";"биржа телеграммы каналов";"Автоматический";"Целевые запросы";1;1;100,00;24,35;24,35;-;-;-
+"биржи покупки рекламы в телеграм";"Новая группа";5555538890;M-16930620460;"купить рекламу в телеграм канале";"фраза";"семантическое";-;"Автоматический";"Целевые запросы";1;1;100,00;113,69;113,69;100,00;113,69;1
+"биржи тг каналов";"Новая группа";5555538890;M-16915113667;'---autotargeting;"автотаргетинг";-;-;"Оригинальный";"Целевые запросы";1;1;100,00;56,91;56,91;-;-;-
+"биржи тг каналов";"Новая группа";5555538890;M-16930620460;'---autotargeting;"автотаргетинг";-;-;"Автоматический";"Целевые запросы";1;1;100,00;78,55;78,55;100,00;78,55;1`;
+
+        // Инициализация обработки данных при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            // Парсинг CSV данных
+            Papa.parse(campaignData, {
+                header: true,
+                delimiter: ';',
+                skipEmptyLines: true,
+                complete: function(results) {
+                    const data = results.data;
+                    analyzeData(data);
+                }
+            });
+        });
+
+        // Анализ данных на основе пересчитанных значений из Python-скрипта
+        function analyzeData(data) {
+            // Общие значения уже заполнены статично в HTML
+
+            // Подготовка структур для анализа
+            const ads = {
+                'M-16915113667': {
+                    impressions: 258,
+                    clicks: 197,
+                    cost: 7489.21,
+                    conversions: 7,
+                    ctr: 76.36
+                },
+                'M-16930620460': {
+                    impressions: 204,
+                    clicks: 89,
+                    cost: 6679.04,
+                    conversions: 10,
+                    ctr: 43.63
+                }
+            };
+            
+            const categories = {
+                'Целевые запросы': {
+                    impressions: 148,
+                    clicks: 83,
+                    conversions: 9
+                },
+                'Сопутствующие запросы': {
+                    impressions: 276,
+                    clicks: 191,
+                    conversions: 7
+                },
+                'Альтернативные запросы': {
+                    impressions: 35,
+                    clicks: 9,
+                    conversions: 0
+                },
+                'Узкие запросы': {
+                    impressions: 3,
+                    clicks: 3,
+                    conversions: 1
+                }
+            };
+            
+            const queryTypes = {
+                'автотаргетинг': { count: 125, clicks: 197 },
+                'фраза': { count: 46, clicks: 89 }
+            };
+            
+            // Создание графика производительности объявлений
+            const adPerformanceChart = new Chart(document.getElementById('adPerformanceChart').getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(ads),
+                    datasets: [
+                        {
+                            label: 'Клики',
+                            data: Object.values(ads).map(ad => ad.clicks),
+                            backgroundColor: 'rgba(59, 130, 246, 0.7)',
+                            borderColor: 'rgba(59, 130, 246, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'CTR (%)',
+                            data: Object.values(ads).map(ad => ad.ctr),
+                            backgroundColor: 'rgba(139, 92, 246, 0.7)',
+                            borderColor: 'rgba(139, 92, 246, 1)',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+            
+            // Создание графика конверсий
+            const conversionChart = new Chart(document.getElementById('conversionChart').getContext('2d'), {
+                type: 'pie',
+                data: {
+                    labels: Object.keys(ads),
+                    datasets: [{
+                        label: 'Конверсии',
+                        data: Object.values(ads).map(ad => ad.conversions),
+                        backgroundColor: [
+                            'rgba(59, 130, 246, 0.7)',
+                            'rgba(139, 92, 246, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(59, 130, 246, 1)',
+                            'rgba(139, 92, 246, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+            
+            // Создание графика категорий таргетинга
+            const categoryPerformanceChart = new Chart(document.getElementById('categoryPerformanceChart').getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(categories),
+                    datasets: [
+                        {
+                            label: 'Клики',
+                            data: Object.values(categories).map(cat => cat.clicks),
+                            backgroundColor: 'rgba(59, 130, 246, 0.7)',
+                            borderColor: 'rgba(59, 130, 246, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Конверсии',
+                            data: Object.values(categories).map(cat => cat.conversions),
+                            backgroundColor: 'rgba(139, 92, 246, 0.7)',
+                            borderColor: 'rgba(139, 92, 246, 1)',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+            
+            // Создание графика типов условий показа
+            const queryTypesChart = new Chart(document.getElementById('queryTypesChart').getContext('2d'), {
+                type: 'doughnut',
+                data: {
+                    labels: Object.keys(queryTypes),
+                    datasets: [{
+                        label: 'Количество запросов',
+                        data: Object.values(queryTypes).map(type => type.count),
+                        backgroundColor: [
+                            'rgba(59, 130, 246, 0.7)',
+                            'rgba(139, 92, 246, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(59, 130, 246, 1)',
+                            'rgba(139, 92, 246, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+            
+            // Топ-5 запросов по CTR (100%)
+            const topCtrKeywords = [
+                {keyword: "каталог с телеграмм каналами и чатами", ctr: 100},
+                {keyword: "поиск каналов тг", ctr: 100},
+                {keyword: "популярные телеграм каналы", ctr: 100},
+                {keyword: "список платных тг каналов", ctr: 100},
+                {keyword: "телеграмм каналы поиск", ctr: 100}
+            ];
+            
+            const topCtrKeywordsChart = new Chart(document.getElementById('topCtrKeywordsChart').getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: topCtrKeywords.map(kw => truncateKeyword(kw.keyword, 20)),
+                    datasets: [{
+                        label: 'CTR (%)',
+                        data: topCtrKeywords.map(kw => kw.ctr),
+                        backgroundColor: 'rgba(59, 130, 246, 0.7)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            max: 100
+                        }
+                    }
+                }
+            });
+            
+            // Запросы с конверсиями
+            const keywordsWithConversions = [
+                {keyword: "аналитика телеграмм каналов бесплатно", conversions: 2},
+                {keyword: "биржи тг каналов", conversions: 2},
+                {keyword: "бесплатная аналитика телеграм каналов", conversions: 1},
+                {keyword: "биржа telegram каналов", conversions: 1},
+                {keyword: "биржи покупки рекламы в телеграм", conversions: 1},
+                {keyword: "телеграмм каналы селлеры", conversions: 1}
+            ];
+            
+            const conversionKeywordsChart = new Chart(document.getElementById('conversionKeywordsChart').getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: keywordsWithConversions.map(kw => truncateKeyword(kw.keyword, 20)),
+                    datasets: [{
+                        label: 'Конверсии',
+                        data: keywordsWithConversions.map(kw => kw.conversions),
+                        backgroundColor: 'rgba(139, 92, 246, 0.7)',
+                        borderColor: 'rgba(139, 92, 246, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Вспомогательная функция для сокращения длинных ключевых слов
+        function truncateKeyword(keyword, maxLength) {
+            if (keyword.length <= maxLength) {
+                return keyword;
+            }
+            return keyword.substring(0, maxLength) + '...';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!-- Ad Performance Analysis -->
+<section class="card mb-8">
+    <h2 class="text-xl font-bold mb-4">Анализ эффективности объявлений</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div>
+            <h3 class="text-lg font-semibold mb-3">Сравнение объявлений</h3>
+            <div class="chart-container">
+                <canvas id="adPerformanceChart"></canvas>
+            </div>
+        </div>
+        
+        <div>
+            <h3 class="text-lg font-semibold mb-3">Конверсии по объявлениям</h3>
+            <div class="chart-container">
+                <canvas id="conversionChart"></canvas>
+            </div>
+        </div>
+    </div>
+    
+    <div>
+        <h3 class="text-lg font-semibold mb-3">Детальный анализ объявлений</h3>
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-white rounded-lg">
+                <thead class="bg-gray-100">
+                    <tr>
+                        <th class="py-2 px-3 text-left text-sm">№ Объявления</th>
+                        <th class="py-2 px-3 text-left text-sm">Показы</th>
+                        <th class="py-2 px-3 text-left text-sm">Клики</th>
+                        <th class="py-2 px-3 text-left text-sm">CTR (%)</th>
+                        <th class="py-2 px-3 text-left text-sm">Расход (руб.)</th>
+                        <th class="py-2 px-3 text-left text-sm">Цена клика</th>
+                        <th class="py-2 px-3 text-left text-sm">Конверсии</th>
+                    </tr>
+                </thead>
+                <tbody id="adPerformanceTable" class="text-sm">
+                    <!-- Данные будут добавлены через JavaScript -->
+                    <tr>
+                        <td colspan="7" class="py-2 px-3 text-center">Загрузка данных...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
